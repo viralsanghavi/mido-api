@@ -89,30 +89,7 @@ Resources:
         Request:
           Type: Api
           Properties:
-            Path: /get-products
-            Method: GET
-            RestApiId: !Ref MidoApi
-
-  GetProductByIdFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: lambdas/get-product-by-id/build/src
-      # CodeUri: .
-      Description: Hello World Lambda Function
-      MemorySize: 512
-      Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
-      Events:
-        Request:
-          Type: Api
-          Properties:
-            Path: /get-product-by-id
+            Path: /products
             Method: GET
             RestApiId: !Ref MidoApi
 
@@ -135,9 +112,10 @@ Resources:
         Request:
           Type: Api
           Properties:
-            Path: /product/add
+            Path: /products/add
             Method: POST
             RestApiId: !Ref MidoApi
+
   DeleteProductFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -157,6 +135,6 @@ Resources:
         Request:
           Type: Api
           Properties:
-            Path: /product/delete
+            Path: /products/delete
             Method: DELETE
             RestApiId: !Ref MidoApi

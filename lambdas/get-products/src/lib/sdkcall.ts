@@ -3,7 +3,10 @@ import {
   DynamoDBClient,
   ScanCommand,
   ScanCommandOutput,
+  GetItemCommand,
 } from "@aws-sdk/client-dynamodb";
+import { GetItemCommandOutput } from "@aws-sdk/client-dynamodb/dist-types/commands";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 
 export class SdkCalls {
@@ -33,6 +36,28 @@ export class SdkCalls {
       const response = await this.ddbClient.send(
         new ScanCommand({
           TableName: tableName,
+        })
+      );
+      return response;
+    } catch (error: any) {
+      throw new Error(
+        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
+      );
+    }
+  }
+
+  async getProductById(
+    tableName: string,
+    id: string
+  ): Promise<GetItemCommandOutput> {
+    try {
+      console.log(`Start get all repositories: ${tableName}`);
+      const response = await this.ddbClient.send(
+        new GetItemCommand({
+          TableName: tableName,
+          Key: marshall({
+            id: id,
+          }),
         })
       );
       return response;
