@@ -2,7 +2,7 @@
   "name": "get-all-categories",
   "version": "1.0.0",
   "description": "Get all categories",
-  "main": "src/index.ts",
+  "main": "src/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf build && tsc --build --clean",

@@ -1,2 +1,6 @@
 node_modules/
 *.env
+lambdas/**/*.js
+
+build/
+.aws-sam

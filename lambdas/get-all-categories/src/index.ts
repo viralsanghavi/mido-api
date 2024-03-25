@@ -21,3 +21,5 @@ export const handler = async function (): Promise<ScanCommandOutput> {
     );
   }
 };
+
+handler()

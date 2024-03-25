@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  GetAllCategoriesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambdas/get-all-categories/src/index.handler
+      Runtime: nodejs18.x
+      CodeUri: .
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 10
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /get-all-categories
+            Method: get
