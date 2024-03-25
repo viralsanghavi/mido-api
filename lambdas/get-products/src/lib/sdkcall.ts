@@ -4,7 +4,7 @@ import {
   ScanCommand,
   ScanCommandOutput,
 } from "@aws-sdk/client-dynamodb";
-import {NodeHttpHandler} from "@smithy/node-http-handler";
+import { NodeHttpHandler } from "@smithy/node-http-handler";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -16,7 +16,7 @@ export class SdkCalls {
         connectionTimeout: 3000,
         socketTimeout: 2000,
       }),
-      endpoint: "http://localhost:8000",
+      endpoint: "http://host.docker.internal:8000",
     });
   }
 

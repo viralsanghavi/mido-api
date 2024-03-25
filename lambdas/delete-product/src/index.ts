@@ -11,12 +11,20 @@ export const handler = async function (
   event: any
 ): Promise<DeleteItemCommandOutput> {
   try {
-    const query = JSON.parse(event.queryParams || "{}");
+    const query = event.queryStringParameters;
     // Initialize SDK calls
 
     const sdkCalls = new SdkCalls(`${region}`);
-    const response = sdkCalls.deleteProduct("product", query.id);
-    console.log(response);
+    const response = sdkCalls.deleteProduct("products", query.id);
+    // const product = unmarshall(response.);
+    console.log("Product deleted successfully");
+    // return getResponse(
+    //   {
+    //     message: "Successfully called the api",
+    //     data: response.Item,
+    //   },
+    //   HTTP_STATUS_CODES.OK
+    // );
     return response;
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   } catch (error: any) {

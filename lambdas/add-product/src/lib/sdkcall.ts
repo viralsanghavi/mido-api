@@ -7,6 +7,7 @@ import {
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { Product } from "./interface";
+import { v4 as uuid } from "uuid";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -18,7 +19,7 @@ export class SdkCalls {
         connectionTimeout: 3000,
         socketTimeout: 2000,
       }),
-      endpoint: "http://localhost:8000",
+      endpoint: "http://host.docker.internal:8000",
     });
   }
 
@@ -31,15 +32,16 @@ export class SdkCalls {
   //    */
   async addProduct(
     tableName: string,
-    product: Product
+    product: any
   ): Promise<PutItemCommandOutput> {
     try {
-      console.log(`Start get all repositories: ${tableName}`);
+      console.log(`Start add product: ${tableName}`);
+      const id: string = uuid();
       const response = await this.ddbClient.send(
         new PutItemCommand({
           TableName: tableName,
           Item: marshall({
-            id: product.id,
+            id: id,
             name: product.name,
           }),
         })

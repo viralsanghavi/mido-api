@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   DynamoDBClient,
-  DeleteItemCommand,
-  DeleteItemCommandOutput,
   GetItemCommand,
   GetItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { table } from "console";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -20,7 +17,7 @@ export class SdkCalls {
         connectionTimeout: 3000,
         socketTimeout: 2000,
       }),
-      endpoint: "http://localhost:8000",
+      endpoint: "http://host.docker.internal:8000",
     });
   }
 

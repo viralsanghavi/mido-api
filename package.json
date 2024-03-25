@@ -10,7 +10,13 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts test/**/*.ts --fix",
-    "package:lambda:get-all-categories": "cd lambdas/get-all-categories/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build"
+    "local:build": "sam build && sam local start-api",
+    "package:lambda:get-all-categories": "cd lambdas/get-all-categories-copy/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:get-categories": "cd lambdas/get-categories/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:get-products": "cd lambdas/get-products/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:get-product-by-id": "cd lambdas/get-product-by-id/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:add-product": "cd lambdas/add-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:delete-product": "cd lambdas/delete-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
   },
   "author": "Viral Sanghavi",
   "license": "ISC",
