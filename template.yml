@@ -1,19 +1,49 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Specification template describing your function.
+Parameters:
+  Region:
+    Type: String
+    Default: ap-south-1
+    Description: The region to deploy the code to.
+  EnvStageName:
+    Default: dev
+    Description: The environment name (e.g. dev, prod, etc.)
+    Type: String
+
+Globals:
+  Function:
+    Handler: index.handler
+    Runtime: nodejs18.x
+
 Resources:
+  MidoApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref EnvStageName
+      Name: mido-api
+      Description: Mido API.
+
   GetAllCategoriesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: lambdas/get-all-categories/src/index.handler
-      Runtime: nodejs18.x
-      CodeUri: .
+      CodeUri: lambdas/get-all-categories-copy/build/src
+      # CodeUri: .
       Description: Hello World Lambda Function
       MemorySize: 512
-      Timeout: 10
+      Timeout: 5
+      # Events:
+        # Request:
+        #   Properties:
+        #     Method: GET
+        #     Path: /group/verify-aadhaar-otp/
+        #     RestApiId: !Ref 
+        #   Type: Api  
       Events:
-        HelloWorld:
+        Request:
           Type: Api
           Properties:
             Path: /get-all-categories
-            Method: get
+            Method: POST
+            RestApiId: !Ref MidoApi
+
