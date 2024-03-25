@@ -33,12 +33,12 @@ Resources:
       MemorySize: 512
       Timeout: 5
       # Events:
-        # Request:
-        #   Properties:
-        #     Method: GET
-        #     Path: /group/verify-aadhaar-otp/
-        #     RestApiId: !Ref 
-        #   Type: Api  
+      # Request:
+      #   Properties:
+      #     Method: GET
+      #     Path: /group/verify-aadhaar-otp/
+      #     RestApiId: !Ref
+      #   Type: Api
       Events:
         Request:
           Type: Api
@@ -46,4 +46,3 @@ Resources:
             Path: /get-all-categories
             Method: POST
             RestApiId: !Ref MidoApi
-

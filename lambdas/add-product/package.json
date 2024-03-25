@@ -1,7 +1,7 @@
 {
-  "name": "get-all-categories",
+  "name": "add-product",
   "version": "1.0.0",
-  "description": "Get all categories",
+  "description": "Add product",
   "main": "src/index.js",
   "scripts": {
     "build": "tsc",
@@ -28,6 +28,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "@smithy/node-http-handler": "^2.5.0"
+    "@smithy/node-http-handler": "^2.5.0",
+    "@aws-sdk/util-dynamodb": "^3.540.0"
   }
 }
