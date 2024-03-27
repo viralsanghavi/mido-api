@@ -46,28 +46,28 @@ const createAllTables = async () => {
       {AttributeName: "name", AttributeType: "S"},
     ]
   );
-  // await createTable(
-  //   "categories",
-  //   [
-  //     {AttributeName: "id", KeyType: "HASH"},
-  //     {AttributeName: "name", KeyType: "RANGE"},
-  //   ],
-  //   [
-  //     {AttributeName: "id", AttributeType: "S"},
-  //     {AttributeName: "name", AttributeType: "S"},
-  //   ]
-  // );
-  // await createTable(
-  //   "products",
-  //   [
-  //     {AttributeName: "id", KeyType: "HASH"},
-  //     {AttributeName: "name", KeyType: "RANGE"},
-  //   ],
-  //   [
-  //     {AttributeName: "id", AttributeType: "S"},
-  //     {AttributeName: "name", AttributeType: "S"},
-  //   ]
-  // );
+  await createTable(
+    "categories",
+    [
+      {AttributeName: "id", KeyType: "HASH"},
+      {AttributeName: "name", KeyType: "RANGE"},
+    ],
+    [
+      {AttributeName: "id", AttributeType: "S"},
+      {AttributeName: "name", AttributeType: "S"},
+    ]
+  );
+  await createTable(
+    "products",
+    [
+      {AttributeName: "id", KeyType: "HASH"},
+      {AttributeName: "name", KeyType: "RANGE"},
+    ],
+    [
+      {AttributeName: "id", AttributeType: "S"},
+      {AttributeName: "name", AttributeType: "S"},
+    ]
+  );
 
   await createTable(
     "contact_details",
@@ -81,17 +81,17 @@ const createAllTables = async () => {
     ]
   );
 
-  // await createTable(
-  //   "testimonials",
-  //   [{AttributeName: "id", KeyType: "HASH"}],
-  //   [{AttributeName: "id", AttributeType: "S"}]
-  // );
+  await createTable(
+    "testimonials",
+    [{AttributeName: "id", KeyType: "HASH"}],
+    [{AttributeName: "id", AttributeType: "S"}]
+  );
 
-  // await createTable(
-  //   "newsletter",
-  //   [{AttributeName: "email", KeyType: "HASH"}],
-  //   [{AttributeName: "email", AttributeType: "S"}]
-  // );
+  await createTable(
+    "newsletter",
+    [{AttributeName: "email", KeyType: "HASH"}],
+    [{AttributeName: "email", AttributeType: "S"}]
+  );
 };
 
 createAllTables();

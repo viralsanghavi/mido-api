@@ -24,49 +24,18 @@ Resources:
       Name: mido-api
       Description: Mido API.
 
-  GetAllCategoriesFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: lambdas/get-all-categories-copy/build/src
-      # CodeUri: .
-      Description: Hello World Lambda Function
-      MemorySize: 512
-      Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
-      Events:
-        Request:
-          Type: Api
-          Properties:
-            Path: /get-all-categories
-            Method: POST
-            RestApiId: !Ref MidoApi
-
   GetCategoriesFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/get-categories/build/src
-      # CodeUri: .
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
       Events:
         Request:
           Type: Api
           Properties:
-            Path: /get-categories
+            Path: /categories
             Method: GET
             RestApiId: !Ref MidoApi
 
@@ -74,17 +43,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/get-products/build/src
-      # CodeUri: .
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
       Events:
         Request:
           Type: Api
@@ -97,17 +58,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/add-product/build/src
-      # CodeUri: .
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
       Events:
         Request:
           Type: Api
@@ -120,21 +73,28 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/delete-product/build/src
-      # CodeUri: .
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
-      # Events:
-      # Request:
-      #   Properties:
-      #     Method: GET
-      #     Path: /group/verify-aadhaar-otp/
-      #     RestApiId: !Ref
-      #   Type: Api
       Events:
         Request:
           Type: Api
           Properties:
             Path: /products/delete
             Method: DELETE
+            RestApiId: !Ref MidoApi
+
+  AddCategoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/add-category/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /categories/add
+            Method: POST
             RestApiId: !Ref MidoApi

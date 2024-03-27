@@ -2,7 +2,10 @@
 
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { SdkCalls } from "./lib/sdkcall";
-import { getResponse, HTTP_STATUS_CODES } from "node-api-helpers/api/api.js";
+import {
+  getResponse,
+  HTTP_STATUS_CODES,
+} from "node-api-helpers/build/api/index.js";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
@@ -21,46 +24,28 @@ export const handler = async function (event: any): Promise<any> {
         return unmarshall(item);
       });
       console.log(products);
-      // return getResponse(
-      //   {
-      //     message: "Successfully called the api",
-      //     data: products,
-      //   },
-      //   HTTP_STATUS_CODES.OK
-      // );
-      return {
-        body: JSON.stringify({
+      return getResponse(
+        {
           message: "Success",
           data: products,
-        }),
-        statusCode: 200,
-        isBase64Encoded: false,
-        headers: {
-          contentType: "application/json",
         },
-      };
+        HTTP_STATUS_CODES.OK
+      );
     } else {
-      const response = await sdkCalls.getProductById("products", query?.id);
+      const response = await sdkCalls.getProductById(
+        "products",
+        query?.id,
+        query?.name
+      );
       const product = unmarshall(response.Item!);
       console.log(product);
-      // return getResponse(
-      //   {
-      //     message: "Successfully called the api",
-      //     data: response.Item,
-      //   },
-      //   HTTP_STATUS_CODES.OK
-      // );
-      return {
-        body: JSON.stringify({
+      return getResponse(
+        {
           message: "Success",
           data: product,
-        }),
-        statusCode: 200,
-        isBase64Encoded: false,
-        headers: {
-          contentType: "application/json",
         },
-      };
+        HTTP_STATUS_CODES.OK
+      );
     }
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   } catch (error: any) {

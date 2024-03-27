@@ -1,29 +1,30 @@
-import { PutItemCommandOutput } from "@aws-sdk/client-dynamodb";
+// import { EcrSdkCalls } from './lib/ecr-sdk-calls';
+
+import { ScanCommandOutput } from "@aws-sdk/client-dynamodb";
 import { SdkCalls } from "./lib/sdkcall";
-import { Product } from "./lib/interface";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import {
-  HTTP_STATUS_CODES,
   getResponse,
+  HTTP_STATUS_CODES,
 } from "node-api-helpers/build/api/index.js";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
 
-export const handler = async function (event: any): Promise<any> {
+export const handler = async function (): Promise<any> {
   try {
-    console.log(event);
-    const body = JSON.parse(event.body);
-    console.log(body);
-
     // Initialize SDK calls
 
     const sdkCalls = new SdkCalls(`${region}`);
-    const response = await sdkCalls.addProduct("products", body);
-    console.log("Product added successfully");
+    const response = await sdkCalls.getCategories("categories");
+    const categories = response.Items?.map((item) => {
+      return unmarshall(item);
+    });
+    console.log(categories);
     return getResponse(
       {
-        message: "Product added successfully",
+        message: "Successfully called the api",
+        data: response.Items,
       },
       HTTP_STATUS_CODES.OK
     );

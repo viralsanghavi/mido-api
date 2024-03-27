@@ -3295,10 +3295,10 @@ nise@^5.1.4:
     just-extend "^6.2.0"
     path-to-regexp "^6.2.1"
 
-node-api-helpers@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/node-api-helpers/-/node-api-helpers-1.0.2.tgz#fcc68725a44b0a122e6f71409d091691939012bd"
-  integrity sha512-Y4Z8C4TwTT4YjEpPgJy2scMSGa95hYTDXizU/HUJSiXrUsLkhFFH6DJfspZqlRxFajN2sn9MDF4HhAaPfQyyKw==
+node-api-helpers@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/node-api-helpers/-/node-api-helpers-1.0.9.tgz#1507793d3d7b3263ace5dd19f7f81f43406ee65b"
+  integrity sha512-FcBMnbQE3Dqo64JH/Jjfp+gxKlkxnwkiCgWXO5Tg+uYy0ny/i8al90qH46+RJrIKVvbtu3F1otDPeWnB8lMQOA==
   dependencies:
     "@aws-sdk/client-lambda" "^3.65.0"
     "@aws-sdk/client-s3" "^3.67.0"

@@ -2383,6 +2383,11 @@ cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
+
 debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -3290,10 +3295,10 @@ nise@^5.1.4:
     just-extend "^6.2.0"
     path-to-regexp "^6.2.1"
 
-node-api-helpers@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-api-helpers/-/node-api-helpers-1.0.0.tgz#3ecfdcd8384acb86edc8c8a8b023de3e2ac4f30a"
-  integrity sha512-YhPBDsV+Y3NaAG4i1vEInD2bLeVEdXhn9IuaXoWBZ1gH99D90YTGt+p+ywGdlGrl96/OSrJ35PcY/AUE8PMLwQ==
+node-api-helpers@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/node-api-helpers/-/node-api-helpers-1.0.9.tgz#1507793d3d7b3263ace5dd19f7f81f43406ee65b"
+  integrity sha512-FcBMnbQE3Dqo64JH/Jjfp+gxKlkxnwkiCgWXO5Tg+uYy0ny/i8al90qH46+RJrIKVvbtu3F1otDPeWnB8lMQOA==
   dependencies:
     "@aws-sdk/client-lambda" "^3.65.0"
     "@aws-sdk/client-s3" "^3.67.0"
@@ -3301,6 +3306,7 @@ node-api-helpers@^1.0.0:
     "@aws-sdk/client-sns" "^3.58.0"
     "@aws-sdk/s3-request-presigner" "^3.67.0"
     bunyan "^1.8.15"
+    crypto "^1.0.1"
     moment "^2.29.2"
     pg "^8.7.3"
 

@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   DynamoDBClient,
-  PutItemCommand,
-  PutItemCommandOutput,
+  ScanCommand,
+  ScanCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-import { Product } from "./interface";
-import { v4 as uuid } from "uuid";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -30,24 +27,12 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async addProduct(
-    tableName: string,
-    product: any
-  ): Promise<PutItemCommandOutput> {
+  async getCategories(tableName: string): Promise<ScanCommandOutput> {
     try {
-      console.log(`Start add product: ${tableName}`);
-      const id: string = uuid();
+      console.log(`Start get all repositories: ${tableName}`);
       const response = await this.ddbClient.send(
-        new PutItemCommand({
+        new ScanCommand({
           TableName: tableName,
-          Item: marshall({
-            id: id,
-            name: product.name,
-            description: product.description,
-            images: product.images,
-            categories: product.categories,
-            price: product.price,
-          }),
         })
       );
       return response;

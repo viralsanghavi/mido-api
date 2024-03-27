@@ -48,7 +48,8 @@ export class SdkCalls {
 
   async getProductById(
     tableName: string,
-    id: string
+    id: string,
+    name: string
   ): Promise<GetItemCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
@@ -57,6 +58,7 @@ export class SdkCalls {
           TableName: tableName,
           Key: marshall({
             id: id,
+            name: name,
           }),
         })
       );
