@@ -203,3 +203,31 @@ Resources:
             Path: /contact-form
             Method: POST
             RestApiId: !Ref MidoApi
+  AddTestimonialsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/add-testimonials/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /add-testimonials
+            Method: POST
+            RestApiId: !Ref MidoApi
+  GetTestimonialsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/get-testimonials/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /get-testimonials
+            Method: GET
+            RestApiId: !Ref MidoApi
