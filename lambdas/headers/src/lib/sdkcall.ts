@@ -4,8 +4,8 @@ import {
   ScanCommand,
   ScanCommandOutput,
   GetItemCommand,
+  GetItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
-import { GetItemCommandOutput } from "@aws-sdk/client-dynamodb/dist-types/commands";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 
@@ -30,7 +30,7 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async getProducts(tableName: string): Promise<ScanCommandOutput> {
+  async getHeaders(tableName: string): Promise<ScanCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
       const response = await this.ddbClient.send(
@@ -46,51 +46,28 @@ export class SdkCalls {
     }
   }
 
-  async getProductById(
+  async getCategories(
     tableName: string,
-    id: string
-  ): Promise<GetItemCommandOutput> {
-    try {
-      console.log(`Start get all repositories: ${tableName}`);
-      const response = await this.ddbClient.send(
-        new GetItemCommand({
-          TableName: tableName,
-          Key: marshall({
-            id: id,
-          }),
-        })
-      );
-      return response;
-    } catch (error: any) {
-      throw new Error(
-        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
-      );
-    }
-  }
-
-  async getProductCategories(
-    tableName: string,
-    categoryIds: string[]
+    masterCategoryId: string
   ): Promise<ScanCommandOutput> {
     try {
-      const expression: string[] = [];
-      const attributeValues: any = {};
-      const attributeNames: any = {};
-      let filterExpression = categoryIds.forEach((item: string, index) => {
-        expression.push(`#${index} = :${index}`);
-        attributeValues[`:${index}`] = { S: item };
-        attributeNames[`#${index}`] = "id";
-      });
-
       const params = {
         TableName: tableName,
-        FilterExpression: expression.join(" or "),
-        ExpressionAttributeValues: attributeValues,
-        ExpressionAttributeNames: attributeNames,
+        FilterExpression: "contains(#master_categories,:master_categories)",
+        ProjectionExpression: "#id,#name",
+        ExpressionAttributeValues: {
+          ":master_categories": {
+            S: masterCategoryId,
+          },
+        },
+        ExpressionAttributeNames: {
+          "#master_categories": "master_categories",
+          "#id": "id",
+          "#name": "name",
+        },
       };
       console.log(params);
 
-      console.log(`Start get all repositories: ${tableName}`);
       const response = await this.ddbClient.send(new ScanCommand(params));
       return response;
     } catch (error: any) {
