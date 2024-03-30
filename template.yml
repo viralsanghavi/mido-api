@@ -184,3 +184,17 @@ Resources:
             Path: /headers
             Method: GET
             RestApiId: !Ref MidoApi
+  ContactFormFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/contact-form/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /contact-form
+            Method: POST
+            RestApiId: !Ref MidoApi
