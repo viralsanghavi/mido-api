@@ -1,0 +1,101 @@
+openapi: 3.0.1
+
+servers:
+  - url: "http://127.0.0.1:3000"
+    description: Local
+
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  params-only:
+    validateRequestBody: true
+    validateRequestParameters: true
+x-amazon-apigateway-gateway-responses:
+  BAD_REQUEST_BODY:
+    responseTemplates:
+      application/json: '{"error": {"code": 400, "message": "$context.error.validationErrorString", "status": "Bad Request"}}'
+info:
+  title: Mido API
+  version: 0.0.1
+
+paths:
+  /categories:
+    get:
+      description: Refresh Token Post API
+      parameters:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/refreshTokenPostResp"
+          description: Generate Token Post object
+        "400":
+          content:
+            application/json:
+              examples:
+                internal-server-error:
+                  $ref: "#/components/examples/bad-request"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    error:
+                    code: 401
+                    message: "Invalid Token"
+                    status: Bad Request
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              examples:
+                internal-server-error:
+                  $ref: "#/components/examples/internal-server-error"
+          description: Internal Server Error
+      # x-amazon-apigateway-integration:
+      #   type: aws_proxy
+      #   httpMethod: GET
+      #   uri:
+      #     Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RefreshTokenFunction.Arn}/invocations"
+      # x-amazon-apigateway-request-validator: all
+
+  # /products:
+  #   get:
+  #     operationId: getProducts
+  #     responses:
+  #       "200":
+  #         description: successful operation
+  #   post:
+  #     operationId: addProduct
+  #     responses:
+  #       "200":
+  #         description: successful operation
+  #   delete:
+  #     operationId: deleteProduct
+  #     responses:
+  #       "200":
+  #         description: successful operation
+  # /categories/add:
+  #   post:
+  #     operationId: addCategory
+  #     responses:
+  #       "200":
+  #         description: successful operation
+  # /categories/delete:
+  #   post:
+  #     operationId: deleteCategory
+  #     responses:
+  #       "200":
+  #         description: successful operation
+  # /categories/update:
+  #   put:
+  #     operationId: updateCategory
+  #     responses:
+  #       "200":
+  #         description: successful operation

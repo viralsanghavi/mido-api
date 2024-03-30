@@ -42,7 +42,7 @@ export class SdkCalls {
           Item: marshall({
             id: id,
             name: body.name,
-            mobile_number: body.mobile_number,
+            phone: body.phone,
             email: body.email,
             created_at: Date.now(),
           }),

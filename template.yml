@@ -23,6 +23,15 @@ Resources:
       StageName: !Ref EnvStageName
       Name: mido-api
       Description: Mido API.
+      Cors:
+        AllowOrigin: "'*'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+      # DefinitionBody:
+      #   Fn::Transform:
+      #     Name: AWS::Include
+      #     Parameters:
+      #       Location: openapi.yml
       # Body:
       #   swagger: 2.0
       #   info:
@@ -34,10 +43,6 @@ Resources:
       #   definitions:
       #     Empty:
       #       type: object
-      Cors:
-        AllowOrigin: "'*'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
 
   GetCategoriesFunction:
     Type: AWS::Serverless::Function
