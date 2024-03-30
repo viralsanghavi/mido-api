@@ -166,3 +166,17 @@ Resources:
             Path: /newsletter
             Method: POST
             RestApiId: !Ref MidoApi
+  HeaderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/headers/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /headers
+            Method: GET
+            RestApiId: !Ref MidoApi

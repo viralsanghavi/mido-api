@@ -22,7 +22,8 @@
     "package:lambda:update-category": "cd lambdas/update-category/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:update-product": "cd lambdas/update-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:get-master-categories": "cd lambdas/get-master-categories/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
-    "package:lambda:newsletter": "cd lambdas/newsletter/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
+    "package:lambda:newsletter": "cd lambdas/newsletter/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:headers": "cd lambdas/headers/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
   },
   "author": "Viral Sanghavi",
   "license": "ISC",
