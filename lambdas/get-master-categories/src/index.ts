@@ -1,7 +1,8 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { ScanCommandOutput } from "@aws-sdk/client-dynamodb";
 import { SdkCalls } from "./lib/sdkcall";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 import {
   getResponse,
   HTTP_STATUS_CODES,
@@ -19,37 +20,29 @@ export const handler = async function (event: any): Promise<any> {
 
     const sdkCalls = new SdkCalls(`${region}`);
     if (!query?.id) {
-      const response = await sdkCalls.getProducts("products");
-      const products = response.Items?.map((item: any) => {
+      const response = await sdkCalls.getMasterCategories("master_categories");
+      const categories = response.Items?.map((item: any) => {
         return unmarshall(item);
       });
-      console.log(products);
+      console.log(categories);
       return getResponse(
         {
           message: "Success",
-          data: products,
+          data: categories,
         },
         HTTP_STATUS_CODES.OK
       );
     } else {
-      const productResponse = await sdkCalls.getProductById(
-        "products",
+      const response = await sdkCalls.getMasterCategoryById(
+        "master_categories",
         query?.id
       );
-      const product = unmarshall(productResponse.Item!);
-      const categoryResponse = await sdkCalls.getProductCategories(
-        "categories",
-        product.categories
-      );
-      const categories = categoryResponse.Items?.map((item: any) => {
-        return unmarshall(item);
-      });
-      product.categories = categories;
-      console.log(product);
+      const category = unmarshall(response.Item!);
+      console.log(category);
       return getResponse(
         {
           message: "Success",
-          data: product,
+          data: category,
         },
         HTTP_STATUS_CODES.OK
       );

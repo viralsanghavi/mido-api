@@ -39,33 +39,27 @@ const createAllTables = async () => {
     "master_categories",
     [
       {AttributeName: "id", KeyType: "HASH"},
-      {AttributeName: "name", KeyType: "RANGE"},
     ],
     [
       {AttributeName: "id", AttributeType: "S"},
-      {AttributeName: "name", AttributeType: "S"},
     ]
   );
   await createTable(
     "categories",
     [
       {AttributeName: "id", KeyType: "HASH"},
-      {AttributeName: "name", KeyType: "RANGE"},
     ],
     [
       {AttributeName: "id", AttributeType: "S"},
-      {AttributeName: "name", AttributeType: "S"},
     ]
   );
   await createTable(
     "products",
     [
       {AttributeName: "id", KeyType: "HASH"},
-      {AttributeName: "name", KeyType: "RANGE"},
     ],
     [
       {AttributeName: "id", AttributeType: "S"},
-      {AttributeName: "name", AttributeType: "S"},
     ]
   );
 
@@ -73,24 +67,22 @@ const createAllTables = async () => {
     "contact_details",
     [
       {AttributeName: "id", KeyType: "HASH"},
-      {AttributeName: "name", KeyType: "RANGE"},
     ],
     [
       {AttributeName: "id", AttributeType: "S"},
-      {AttributeName: "name", AttributeType: "S"},
     ]
   );
 
   await createTable(
     "testimonials",
     [{AttributeName: "id", KeyType: "HASH"}],
-    [{AttributeName: "id", AttributeType: "S"}]
+    [{AttributeName: "id", AttributeType: "S"}],
   );
 
   await createTable(
     "newsletter",
     [{AttributeName: "email", KeyType: "HASH"}],
-    [{AttributeName: "email", AttributeType: "S"}]
+    [{AttributeName: "email", AttributeType: "S"}],
   );
 };
 

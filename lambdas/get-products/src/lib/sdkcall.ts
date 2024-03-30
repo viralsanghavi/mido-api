@@ -48,8 +48,7 @@ export class SdkCalls {
 
   async getProductById(
     tableName: string,
-    id: string,
-    name: string
+    id: string
   ): Promise<GetItemCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
@@ -58,10 +57,59 @@ export class SdkCalls {
           TableName: tableName,
           Key: marshall({
             id: id,
-            name: name,
           }),
         })
       );
+      return response;
+    } catch (error: any) {
+      throw new Error(
+        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
+      );
+    }
+  }
+
+  async getProductCategories(
+    tableName: string,
+    categoryIds: string[]
+  ): Promise<ScanCommandOutput> {
+    try {
+      // const itemKeys = (
+      //   Object.keys(categoryIds) as Array<keyof typeof categoryIds>
+      // ).filter((k) => k !== id);
+
+      // let updateExpression = "SET ";
+      // let expressionAttributeValues: { [key: string]: any } = {};
+
+      // for (const key in category) {
+      //   updateExpression += `${key} = :${key}, `;
+      //   expressionAttributeValues[`:${key}`] = category[key];
+      // }
+
+      // // Remove trailing comma and space
+      // updateExpression = updateExpression.slice(0, -2);
+
+      // console.log(updateExpression);
+      // console.log(expressionAttributeValues);
+
+      const expression: string[] = [];
+      const attributeValues: any = {};
+      const attributeNames: any = {};
+      let filterExpression = categoryIds.forEach((item: string, index) => {
+        expression.push(`#${index} = :${index}`);
+        attributeValues[`:${index}`] = { S: item };
+        attributeNames[`#${index}`] = "id";
+      });
+
+      const params = {
+        TableName: tableName,
+        FilterExpression: expression.join(" or "),
+        ExpressionAttributeValues: attributeValues,
+        ExpressionAttributeNames: attributeNames,
+      };
+      console.log(params);
+
+      console.log(`Start get all repositories: ${tableName}`);
+      const response = await this.ddbClient.send(new ScanCommand(params));
       return response;
     } catch (error: any) {
       throw new Error(

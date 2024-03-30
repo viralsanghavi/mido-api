@@ -1,12 +1,9 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import { DeleteItemCommandOutput } from "@aws-sdk/client-dynamodb";
+import { ScanCommandOutput } from "@aws-sdk/client-dynamodb";
 import { SdkCalls } from "./lib/sdkcall";
-import { Product } from "./lib/interface";
-import {
-  HTTP_STATUS_CODES,
-  getResponse,
-} from "node-api-helpers/build/api/index.js";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { getResponse, HTTP_STATUS_CODES } from "node-api-helpers";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
@@ -17,12 +14,14 @@ export const handler = async function (event: any): Promise<any> {
     // Initialize SDK calls
 
     const sdkCalls = new SdkCalls(`${region}`);
-    const response = await sdkCalls.deleteProduct("products", query.id);
-    // const product = unmarshall(response.);
-    console.log("Product deleted successfully");
+    const response = await sdkCalls.deleteCategory(
+      "categories",
+      query.id
+    );
+
     return getResponse(
       {
-        message: "Product deleted successfully",
+        message: "Successfully deleted category",
       },
       HTTP_STATUS_CODES.OK
     );

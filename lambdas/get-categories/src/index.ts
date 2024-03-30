@@ -33,7 +33,7 @@ export const handler = async function (event: any): Promise<any> {
         HTTP_STATUS_CODES.OK
       );
     } else {
-      const response = await sdkCalls.getCategoryById("categories", query?.id,query?.name);
+      const response = await sdkCalls.getCategoryById("categories", query?.id);
       const category = unmarshall(response.Item!);
       console.log(category);
       return getResponse(

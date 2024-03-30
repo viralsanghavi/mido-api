@@ -31,8 +31,7 @@ export class SdkCalls {
   //    */
   async deleteProduct(
     tableName: string,
-    id: string,
-    name: string
+    id: string
   ): Promise<DeleteItemCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
@@ -41,7 +40,6 @@ export class SdkCalls {
           TableName: tableName,
           Key: marshall({
             id: id,
-            name: name,
           }),
         })
       );

@@ -1,8 +1,9 @@
+import { marshall } from "@aws-sdk/util-dynamodb";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   DynamoDBClient,
-  ScanCommand,
-  ScanCommandOutput,
+  DeleteItemCommand,
+  DeleteItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 
@@ -27,12 +28,18 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async getCategories(tableName: string): Promise<ScanCommandOutput> {
+  async deleteCategory(
+    tableName: string,
+    id: string
+  ): Promise<DeleteItemCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
       const response = await this.ddbClient.send(
-        new ScanCommand({
+        new DeleteItemCommand({
           TableName: tableName,
+          Key: marshall({
+            id: id,
+          }),
         })
       );
       return response;

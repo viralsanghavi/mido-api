@@ -18,11 +18,22 @@ Globals:
 
 Resources:
   MidoApi:
-    Type: AWS::Serverless::Api
+    Type: AWS::Serverless::RestApi
     Properties:
       StageName: !Ref EnvStageName
       Name: mido-api
       Description: Mido API.
+      # Body:
+      #   swagger: 2.0
+      #   info:
+      #     version: 0.0.1
+      #     title: Mido API
+      #   basePath: /
+      #   schemes:
+      #     - https
+      #   definitions:
+      #     Empty:
+      #       type: object
 
   GetCategoriesFunction:
     Type: AWS::Serverless::Function
@@ -96,5 +107,62 @@ Resources:
           Type: Api
           Properties:
             Path: /categories/add
+            Method: POST
+            RestApiId: !Ref MidoApi
+
+  DeleteCategoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/delete-category/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /categories/delete
+            Method: POST
+            RestApiId: !Ref MidoApi
+  UpdateCategoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/update-category/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /categories/update
+            Method: PUT
+            RestApiId: !Ref MidoApi
+  GetMasterCategoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/get-master-categories/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /master-categories
+            Method: GET
+            RestApiId: !Ref MidoApi
+  NewsletterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/newsletter/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /newsletter
             Method: POST
             RestApiId: !Ref MidoApi

@@ -30,7 +30,7 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async getCategories(tableName: string): Promise<ScanCommandOutput> {
+  async getMasterCategories(tableName: string): Promise<ScanCommandOutput> {
     try {
       console.log(`Start get all repositories: ${tableName}`);
       const response = await this.ddbClient.send(
@@ -45,7 +45,7 @@ export class SdkCalls {
       );
     }
   }
-  async getCategoryById(
+  async getMasterCategoryById(
     tableName: string,
     id: string
   ): Promise<GetItemCommandOutput> {

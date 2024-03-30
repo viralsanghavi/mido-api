@@ -46,6 +46,8 @@ export class SdkCalls {
             image: category.image,
             banner_image: category.banner_image,
             master_categories: category.master_categories,
+            created_at: Date.now(),
+            updated_at: Date.now(),
           }),
         })
       );
