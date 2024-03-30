@@ -999,6 +999,13 @@
   dependencies:
     tslib "^2.6.2"
 
+"@aws-sdk/util-dynamodb@^3.540.0":
+  version "3.540.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.540.0.tgz#ba1a675c477ea7b7cecd9a7d6f87132774ae0fb7"
+  integrity sha512-Er3OCddj5MhJIpX4jzjeHpvyTcYk+LE1b2Efaku1xT8LeQ29mhg+6BFPsbYydqIas5KLQd8AiNVWBWN8qdpLRA==
+  dependencies:
+    tslib "^2.6.2"
+
 "@aws-sdk/util-endpoints@3.535.0":
   version "3.535.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-endpoints/-/util-endpoints-3.535.0.tgz#46f4b61b2661d6414ded8c98e4ad3c82a0bf597b"
@@ -1535,6 +1542,11 @@
     "@smithy/abort-controller" "^2.2.0"
     "@smithy/types" "^2.12.0"
     tslib "^2.6.2"
+
+"@types/uuid@^9.0.8":
+  version "9.0.8"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.8.tgz#7545ba4fc3c003d6c756f651f3bf163d8f0f29ba"
+  integrity sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==
 
 balanced-match@^1.0.0:
   version "1.0.2"

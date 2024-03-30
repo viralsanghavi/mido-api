@@ -44,8 +44,9 @@ export const handler = async function (): Promise<any> {
     // const master_categoriesa = response.Items?.map((item: any) => {
     //   return unmarshall(item);
     // });
-
     console.log(master_categories);
+    master_categories.sort((a: any, b: any) => a.order - b.order);
+
     return getResponse(
       {
         message: "Success",

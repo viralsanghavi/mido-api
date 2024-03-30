@@ -36,6 +36,16 @@ export class SdkCalls {
       const response = await this.ddbClient.send(
         new ScanCommand({
           TableName: tableName,
+          ConsistentRead: false,
+          FilterExpression: "#4e5b0 = :4e5b0",
+          ExpressionAttributeValues: {
+            ":4e5b0": {
+              BOOL: true,
+            },
+          },
+          ExpressionAttributeNames: {
+            "#4e5b0": "is_header",
+          },
         })
       );
       return response;
@@ -69,6 +79,8 @@ export class SdkCalls {
       console.log(params);
 
       const response = await this.ddbClient.send(new ScanCommand(params));
+      console.log(response.Items);
+
       return response;
     } catch (error: any) {
       throw new Error(
