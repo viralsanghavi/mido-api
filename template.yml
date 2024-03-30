@@ -18,7 +18,7 @@ Globals:
 
 Resources:
   MidoApi:
-    Type: AWS::Serverless::RestApi
+    Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref EnvStageName
       Name: mido-api
@@ -34,6 +34,10 @@ Resources:
       #   definitions:
       #     Empty:
       #       type: object
+      Cors:
+        AllowOrigin: "'*'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
 
   GetCategoriesFunction:
     Type: AWS::Serverless::Function

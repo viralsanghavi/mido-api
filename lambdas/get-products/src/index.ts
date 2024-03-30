@@ -1,11 +1,11 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { SdkCalls } from "./lib/sdkcall";
+import {unmarshall} from "@aws-sdk/util-dynamodb";
 import {
   getResponse,
   HTTP_STATUS_CODES,
 } from "node-api-helpers/build/api/index.js";
+import {SdkCalls} from "./lib/sdkcall";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
@@ -23,7 +23,6 @@ export const handler = async function (event: any): Promise<any> {
       const products = response.Items?.map((item: any) => {
         return unmarshall(item);
       });
-      console.log(products);
       return getResponse(
         {
           message: "Success",
@@ -45,7 +44,6 @@ export const handler = async function (event: any): Promise<any> {
         return unmarshall(item);
       });
       product.categories = categories;
-      console.log(product);
       return getResponse(
         {
           message: "Success",
