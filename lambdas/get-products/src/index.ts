@@ -18,10 +18,10 @@ export const handler = async function (event: any): Promise<any> {
     // Initialize SDK calls
 
     const sdkCalls = new SdkCalls(`${region}`);
-    if (query?.productId) {
+    if (query?.product_id) {
       const productResponse = await sdkCalls.getProductById(
         "products",
-        query?.id
+        query?.product_id
       );
       const product = unmarshall(productResponse.Item!);
       const categoryResponse = await sdkCalls.getProductCategories(
@@ -39,10 +39,10 @@ export const handler = async function (event: any): Promise<any> {
         },
         HTTP_STATUS_CODES.OK
       );
-    } else if (query?.categoryId) {
+    } else if (query?.category_id) {
       const response = await sdkCalls.getProductsByCategory(
         "products",
-        query.categoryId
+        query.category_id
       );
       const products = response.Items?.map((item: any) => {
         return unmarshall(item);
