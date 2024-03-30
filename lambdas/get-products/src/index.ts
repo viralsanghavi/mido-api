@@ -1,11 +1,11 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import {unmarshall} from "@aws-sdk/util-dynamodb";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 import {
   getResponse,
   HTTP_STATUS_CODES,
 } from "node-api-helpers/build/api/index.js";
-import {SdkCalls} from "./lib/sdkcall";
+import { SdkCalls } from "./lib/sdkcall";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
@@ -18,19 +18,7 @@ export const handler = async function (event: any): Promise<any> {
     // Initialize SDK calls
 
     const sdkCalls = new SdkCalls(`${region}`);
-    if (!query?.id) {
-      const response = await sdkCalls.getProducts("products");
-      const products = response.Items?.map((item: any) => {
-        return unmarshall(item);
-      });
-      return getResponse(
-        {
-          message: "Success",
-          data: products,
-        },
-        HTTP_STATUS_CODES.OK
-      );
-    } else {
+    if (query?.productId) {
       const productResponse = await sdkCalls.getProductById(
         "products",
         query?.id
@@ -48,6 +36,33 @@ export const handler = async function (event: any): Promise<any> {
         {
           message: "Success",
           data: product,
+        },
+        HTTP_STATUS_CODES.OK
+      );
+    } else if (query?.categoryId) {
+      const response = await sdkCalls.getProductsByCategory(
+        "products",
+        query.categoryId
+      );
+      const products = response.Items?.map((item: any) => {
+        return unmarshall(item);
+      });
+      return getResponse(
+        {
+          message: "Success",
+          data: products,
+        },
+        HTTP_STATUS_CODES.OK
+      );
+    } else {
+      const response = await sdkCalls.getProducts("products");
+      const products = response.Items?.map((item: any) => {
+        return unmarshall(item);
+      });
+      return getResponse(
+        {
+          message: "Success",
+          data: products,
         },
         HTTP_STATUS_CODES.OK
       );

@@ -17,17 +17,6 @@ export const handler = async function (): Promise<any> {
 
     const sdkCalls = new SdkCalls(`${region}`);
     const response = await sdkCalls.getHeaders("master_categories");
-    // const master_categories: any = [];
-    // const master_categories = response.Items?.map(
-    //   async (element) => {
-    //     let data = unmarshall(element);
-    //     data.categories = (
-    //       await sdkCalls.getCategories("categories", data.id)
-    //     ).Items;
-    //     console.log(master_categories);
-    //     return data;
-    //   }
-    // );
     const master_categories: any = [];
     if (response.Items) {
       for (let i in response.Items) {

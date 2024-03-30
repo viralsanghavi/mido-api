@@ -46,6 +46,34 @@ export class SdkCalls {
     }
   }
 
+  async getProductsByCategory(
+    tableName: string,
+    id: string
+  ): Promise<ScanCommandOutput> {
+    try {
+      console.log(`Start get all repositories: ${tableName}`);
+      const response = await this.ddbClient.send(
+        new ScanCommand({
+          TableName: tableName,
+          FilterExpression: "contains(#categories,:categories)",
+          ExpressionAttributeValues: {
+            ":categories": {
+              S: id,
+            },
+          },
+          ExpressionAttributeNames: {
+            "#categories": "categories",
+          },
+        })
+      );
+      return response;
+    } catch (error: any) {
+      throw new Error(
+        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
+      );
+    }
+  }
+
   async getProductById(
     tableName: string,
     id: string
