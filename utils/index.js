@@ -262,6 +262,38 @@ const insertProducts = async () => {
       },
     })
   );
+
+};
+const insertUiConfig = async () => {
+  return await client.send(
+    new BatchWriteItemCommand({
+      RequestItems: {
+        ui_config: [
+          {
+            PutRequest: {
+              Item: marshall({
+                name: "Home",
+                elements: [{
+                  "id":"b3c25754-b8a4-4d14-ba0a-7f454410d38e",
+                  "type":"master_categories",
+                  "order":1
+                },{
+                  "id":"77f01486-fb11-447d-babf-98a082e233ed",
+                  "type":"categories",
+                  "order":2
+                }],
+                created_at: Date.now(),
+                updated_at: Date.now(),
+              }),
+            },
+          },
+          
+          
+        ],
+      },
+    })
+  );
+
 };
 
 const createAllTables = async () => {
@@ -299,11 +331,19 @@ const createAllTables = async () => {
     [{AttributeName: "email", AttributeType: "S"}]
   );
 
-  // await insertMasterCategories();
+  await createTable(
+    "ui_config",
+    [{AttributeName: "name", KeyType: "HASH"}],
+    [{AttributeName: "name", AttributeType: "S"}]
+  );
 
-  // await insertCategories();
+  await insertMasterCategories();
 
-  // await insertProducts();
+  await insertCategories();
+
+  await insertProducts();
+
+  await insertUiConfig();
 };
 
 createAllTables();

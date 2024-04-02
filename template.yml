@@ -248,3 +248,18 @@ Resources:
             Path: /images/upload
             Method: POST
             RestApiId: !Ref MidoApi
+
+  HomePageDataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/home-page-data/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /home
+            Method: GET
+            RestApiId: !Ref MidoApi
