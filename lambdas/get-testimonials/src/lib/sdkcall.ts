@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  DynamoDBClient,
-  PutItemCommand,
-  PutItemCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import {marshall} from "@aws-sdk/util-dynamodb";
+import {DynamoDBClient} from "@aws-sdk/client-dynamodb";
 import {NodeHttpHandler} from "@smithy/node-http-handler";
-import {v4 as uuid} from "uuid";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {ScanCommand, ScanCommandOutput} from "@aws-sdk/client-dynamodb";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -29,28 +25,17 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async contactForm(
-    tableName: string,
-    body: any
-  ): Promise<PutItemCommandOutput> {
+  async getTestimonials(tableName: string): Promise<ScanCommandOutput> {
     try {
-      const id: string = uuid();
       const response = await this.ddbClient.send(
-        new PutItemCommand({
+        new ScanCommand({
           TableName: tableName,
-          Item: marshall({
-            id: id,
-            name: body.name,
-            phone: body.phone,
-            email: body.email,
-            created_at: Date.now(),
-          }),
         })
       );
       return response;
     } catch (error: any) {
       throw new Error(
-        `[Error - ECR] An error occurred calling the Put Command: ${error}`
+        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
       );
     }
   }

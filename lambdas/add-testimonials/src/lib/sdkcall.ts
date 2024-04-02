@@ -29,28 +29,30 @@ export class SdkCalls {
   //    * @param {string} policyText - The JSON representation of the lifecycle policy.
   //    * @returns {Promise<void>} - Resolves when the lifecycle rules are applied.
   //    */
-  async contactForm(
+  async addTestimonials(
     tableName: string,
-    body: any
+    testimonial: Testimonial
   ): Promise<PutItemCommandOutput> {
     try {
+      console.log(`Start add category: ${tableName}`);
       const id: string = uuid();
       const response = await this.ddbClient.send(
         new PutItemCommand({
           TableName: tableName,
           Item: marshall({
             id: id,
-            name: body.name,
-            phone: body.phone,
-            email: body.email,
+            name: testimonial.name,
+            review: testimonial.review,
+            companyName: testimonial.companyName,
             created_at: Date.now(),
+            updated_at: Date.now(),
           }),
         })
       );
       return response;
     } catch (error: any) {
       throw new Error(
-        `[Error - ECR] An error occurred calling the Put Command: ${error}`
+        `[Error - ECR] An error occurred calling the Scan Command: ${error.message}`
       );
     }
   }
