@@ -54,6 +54,21 @@ export const handler = async function (event: any): Promise<any> {
         },
         HTTP_STATUS_CODES.OK
       );
+    } else if (query?.search) {
+      const response = await sdkCalls.getProductbySearch(
+        "products",
+        query.search
+      );
+      const products = response.Items?.map((item: any) => {
+        return unmarshall(item);
+      });
+      return getResponse(
+        {
+          message: "Success",
+          data: products,
+        },
+        HTTP_STATUS_CODES.OK
+      );
     } else {
       const response = await sdkCalls.getProducts("products");
       const products = response.Items?.map((item: any) => {
