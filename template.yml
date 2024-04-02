@@ -80,7 +80,7 @@ Resources:
       CodeUri: lambdas/add-product/build/src
       Description: Hello World Lambda Function
       MemorySize: 512
-      Timeout: 5
+      Timeout: 30
       Events:
         Request:
           Type: Api
