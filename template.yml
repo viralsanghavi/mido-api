@@ -15,6 +15,9 @@ Globals:
   Function:
     Handler: index.handler
     Runtime: nodejs18.x
+  Api:
+    BinaryMediaTypes:
+      - "*~1*"
 
 Resources:
   MidoApi:
@@ -230,4 +233,18 @@ Resources:
           Properties:
             Path: /get-testimonials
             Method: GET
+            RestApiId: !Ref MidoApi
+  UploadImageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/upload-image/build/src
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 30
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /images/upload
+            Method: POST
             RestApiId: !Ref MidoApi

@@ -26,7 +26,8 @@
     "package:lambda:headers": "cd lambdas/headers/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:contact-form": "cd lambdas/contact-form/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:add-testimonials": "cd lambdas/add-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
-    "package:lambda:get-testimonials": "cd lambdas/get-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
+    "package:lambda:get-testimonials": "cd lambdas/get-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:upload-image": "cd lambdas/upload-image/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
   },
   "author": "Viral Sanghavi",
   "license": "ISC",
