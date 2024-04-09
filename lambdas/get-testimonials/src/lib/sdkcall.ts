@@ -14,7 +14,7 @@ export class SdkCalls {
         connectionTimeout: 3000,
         socketTimeout: 2000,
       }),
-      endpoint: "http://host.docker.internal:8000",
+      // endpoint: "http://host.docker.internal:8000",
     });
   }
 

@@ -8,7 +8,7 @@ export const handler = async (event) => {
       connectionTimeout: 3000,
       socketTimeout: 2000,
     }),
-    endpoint: "http://host.docker.internal:8000",
+    // endpoint: "http://host.docker.internal:8000",
   });
   console.log(event);
   const response = await ddbClient.send(

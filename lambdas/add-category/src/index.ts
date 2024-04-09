@@ -1,9 +1,7 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import { ScanCommandOutput } from "@aws-sdk/client-dynamodb";
-import { SdkCalls } from "./lib/sdkcall";
-import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { getResponse, HTTP_STATUS_CODES } from "node-api-helpers";
+import {getResponse, HTTP_STATUS_CODES} from "node-api-helpers";
+import {SdkCalls} from "./lib/sdkcall";
 
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;

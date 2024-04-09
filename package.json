@@ -17,7 +17,7 @@
     "package:lambda:get-products": "cd lambdas/get-products/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:add-product": "cd lambdas/add-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:delete-product": "cd lambdas/delete-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
-    "package:lambda:delete-categpry": "cd lambdas/delete-category/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package:lambda:delete-category": "cd lambdas/delete-category/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:add-category": "cd lambdas/add-category/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:update-category": "cd lambdas/update-category/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:update-product": "cd lambdas/update-product/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
@@ -27,7 +27,8 @@
     "package:lambda:contact-form": "cd lambdas/contact-form/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:add-testimonials": "cd lambdas/add-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:get-testimonials": "cd lambdas/get-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
-    "package:lambda:upload-image": "cd lambdas/upload-image/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
+    "package:lambda:upload-image": "cd lambdas/upload-image/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package": "yarn && yarn package:lambda:get-categories && yarn package:lambda:get-products && yarn package:lambda:add-product && yarn package:lambda:delete-product && yarn package:lambda:delete-category && yarn package:lambda:add-category && yarn package:lambda:update-category && yarn package:lambda:update-product && yarn package:lambda:get-master-categories && yarn package:lambda:newsletter && yarn package:lambda:headers && yarn package:lambda:contact-form && yarn package:lambda:add-testimonials && yarn package:lambda:get-testimonials && yarn package:lambda:upload-image"
   },
   "author": "Viral Sanghavi",
   "license": "ISC",

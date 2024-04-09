@@ -4,9 +4,9 @@ import {
   PutItemCommand,
   PutItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
-import { marshall } from "@aws-sdk/util-dynamodb";
-import { NodeHttpHandler } from "@smithy/node-http-handler";
-import { v4 as uuid } from "uuid";
+import {marshall} from "@aws-sdk/util-dynamodb";
+import {NodeHttpHandler} from "@smithy/node-http-handler";
+import {v4 as uuid} from "uuid";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
@@ -18,7 +18,7 @@ export class SdkCalls {
         connectionTimeout: 3000,
         socketTimeout: 2000,
       }),
-      endpoint: "http://host.docker.internal:8000",
+      // endpoint: "http://host.docker.internal:8000",
     });
   }
 
