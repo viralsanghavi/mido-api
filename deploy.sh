@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ENV="prod"
+ENV="${EnvStageName:=prod}"
 REGION="ap-south-1"
 STACK_NAME="mido-api-stack-$ENV"
 MIDO_CF_BUCKET_NAME="mido-gift-cf-$ENV-code-deploy"

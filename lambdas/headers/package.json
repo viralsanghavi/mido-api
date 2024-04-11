@@ -30,6 +30,6 @@
   "dependencies": {
     "@aws-sdk/util-dynamodb": "^3.540.0",
     "@smithy/node-http-handler": "^2.5.0",
-    "node-api-helpers": "^1.0.9"
+    "node-api-helpers": "^1.0.14"
   }
 }

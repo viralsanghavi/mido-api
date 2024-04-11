@@ -7,7 +7,7 @@ Parameters:
     Default: ap-south-1
     Description: The region to deploy the code to.
   EnvStageName:
-    Default: dev
+    Default: prod
     Description: The environment name (e.g. dev, prod, etc.)
     Type: String
 
@@ -26,26 +26,24 @@ Resources:
       StageName: !Ref EnvStageName
       Name: mido-api
       Description: Mido API.
-      Cors:
-        AllowOrigin: "'*'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
-      # DefinitionBody:
-      #   Fn::Transform:
-      #     Name: AWS::Include
-      #     Parameters:
-      #       Location: openapi.yml
-      # Body:
-      #   swagger: 2.0
-      #   info:
-      #     version: 0.0.1
-      #     title: Mido API
-      #   basePath: /
-      #   schemes:
-      #     - https
-      #   definitions:
-      #     Empty:
-      #       type: object
+
+  DummyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/dummy/
+      Description: Hello World Lambda Function
+      MemorySize: 512
+      Timeout: 5
+      Policies:
+        # Give your Lambda full access to DynamoDB
+        - AmazonDynamoDBFullAccess
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+            RestApiId: !Ref MidoApi
 
   GetCategoriesFunction:
     Type: AWS::Serverless::Function

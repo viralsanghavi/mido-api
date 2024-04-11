@@ -7,10 +7,23 @@ import {unmarshall} from "@aws-sdk/util-dynamodb";
 // Get Environment variables
 const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
 
-export const handler = async function (event: any): Promise<any> {
+export const handler = async function (event: any, context: any): Promise<any> {
+  context.callbackWaitsForEmptyEventLoop = false;
+  console.log("=>>>>>>>>", event);
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      isBase64Encoded: false,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS ,POST ,GET ,PUT ,DELETE",
+      },
+    };
+  }
+
   try {
     // Initialize SDK calls
-
     const sdkCalls = new SdkCalls(`${region}`);
     const response = await sdkCalls.getTestimonials("testimonials");
     const testimonials = response.Items?.map((item: any) => {
