@@ -30,7 +30,7 @@ Resources:
   DummyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mido-gift-cf-prod-code-deploy/a21b2fc34b9226af694b22498e8612e4
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/d7c6e8c5f8eeba15c34b9ffa489142df
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
@@ -277,7 +277,7 @@ Resources:
   GetTestimonialsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mido-gift-cf-prod-code-deploy/8e181a8bafbb2275b863689c8a3edeed
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/97ab49a5a660eae2f3ac2eb189276612
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
