@@ -16,6 +16,10 @@ Globals:
     Handler: index.handler
     Runtime: nodejs18.x
   Api:
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
     BinaryMediaTypes:
       - "*~1*"
 
