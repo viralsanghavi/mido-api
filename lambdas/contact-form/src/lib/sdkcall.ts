@@ -7,9 +7,11 @@ import {
 import {marshall} from "@aws-sdk/util-dynamodb";
 import {NodeHttpHandler} from "@smithy/node-http-handler";
 import {v4 as uuid} from "uuid";
+import {SESClient, SendEmailCommand} from "@aws-sdk/client-ses"; // ES Modules import
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;
+  private sesClient: SESClient;
 
   constructor(region: string) {
     this.ddbClient = new DynamoDBClient({
@@ -20,6 +22,7 @@ export class SdkCalls {
       }),
       // endpoint: "http://host.docker.internal:8000",
     });
+    this.sesClient = new SESClient();
   }
 
   //   Update the below later
@@ -47,10 +50,53 @@ export class SdkCalls {
           }),
         })
       );
+      this.sendEmail(body);
       return response;
     } catch (error: any) {
       throw new Error(
         `[Error - ECR] An error occurred calling the Put Command: ${error}`
+      );
+    }
+  }
+  async sendEmail(body: any) {
+    try {
+      const input = {
+        // SendEmailRequest
+        Source: "hello@midogift.in", // required
+        Destination: {
+          // Destination
+          ToAddresses: [
+            // AddressList
+            body?.email,
+            "hello@midogift.in",
+          ],
+          BccAddresses: ["vsanghavi3@gmail.com"],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `We have received your request: ${body.name}. Your message ${body?.message}`,
+            },
+            Text: {
+              Charset: "UTF-8",
+              Data: "This is the message body in text format.",
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Test email",
+          },
+        },
+        ReplyToAddresses: ["hello@midogift.in"],
+      };
+      const command = new SendEmailCommand(input);
+      const response = await this.sesClient.send(command);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      throw new Error(
+        `[Error - SES] An error occurred calling the SES command: ${error}`
       );
     }
   }

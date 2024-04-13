@@ -20,8 +20,8 @@ Globals:
       AllowOrigin: "'*'"
       AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
       AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
-    BinaryMediaTypes:
-      - "*~1*"
+    # BinaryMediaTypes:
+    #   - "*~1*"
 
 Resources:
   MidoApi:
