@@ -1,8 +1,8 @@
 // import { EcrSdkCalls } from './lib/ecr-sdk-calls';
 
-import { ScanCommandOutput } from "@aws-sdk/client-dynamodb";
-import { SdkCalls } from "./lib/sdkcall";
-import { unmarshall } from "@aws-sdk/util-dynamodb";
+import {ScanCommandOutput} from "@aws-sdk/client-dynamodb";
+import {SdkCalls} from "./lib/sdkcall";
+import {unmarshall} from "@aws-sdk/util-dynamodb";
 import {
   getResponse,
   HTTP_STATUS_CODES,
@@ -14,8 +14,6 @@ const region = process.env.REGION || process.env.AWS_DEFAULT_REGION;
 export const handler = async function (): Promise<any> {
   try {
     // Initialize SDK calls
-
-    console.log("asdfghjkasdfghjkl");
 
     const sdkCalls = new SdkCalls(`${region}`);
     const response = await sdkCalls.getHomePageData("ui_config", "Home");
@@ -98,7 +96,7 @@ export const handler = async function (): Promise<any> {
     //     elements.push(categories?.find((item) => item.id == element.id));
     //   }
     // }
-    console.log(data);
+    console.log({data});
 
     return getResponse(
       {

@@ -1,6 +1,6 @@
 import {
-  HTTP_STATUS_CODES,
   getResponse,
+  HTTP_STATUS_CODES,
 } from "node-api-helpers/build/api/index.js";
 import {SdkCalls} from "./lib/sdkcall";
 
@@ -22,8 +22,14 @@ export const handler = async function (event: any): Promise<any> {
     );
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    throw new Error(
+    console.log(
       `[Error] - Failed to execute lambda function: ${error.message}`
+    );
+    return getResponse(
+      {
+        message: `[Error] - Failed to execute lambda function: ${error.message}`,
+      },
+      HTTP_STATUS_CODES.BAD_REQUEST
     );
   }
 };

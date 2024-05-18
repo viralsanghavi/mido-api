@@ -10,7 +10,6 @@ export const handler = async (event) => {
     }),
     // endpoint: "http://host.docker.internal:8000",
   });
-  console.log(event);
   const response = await ddbClient.send(
     new ScanCommand({TableName: "categories"})
   );

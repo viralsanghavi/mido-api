@@ -29,8 +29,8 @@
     "package:lambda:get-testimonials": "cd lambdas/get-testimonials/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:upload-image": "cd lambdas/upload-image/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
     "package:lambda:dummy": "cd lambdas/dummy/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
-    "package": "yarn && yarn package:lambda:get-categories && yarn package:lambda:get-products && yarn package:lambda:add-product && yarn package:lambda:delete-product && yarn package:lambda:delete-category && yarn package:lambda:add-category && yarn package:lambda:update-category && yarn package:lambda:update-product && yarn package:lambda:get-master-categories && yarn package:lambda:newsletter && yarn package:lambda:headers && yarn package:lambda:contact-form && yarn package:lambda:add-testimonials && yarn package:lambda:get-testimonials && yarn package:lambda:upload-image",
-    "package:lambda:home-page-data": "cd lambdas/home-page-data/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../.."
+    "package:lambda:home-page-data": "cd lambdas/home-page-data/ && rm -rf build/src/ && mkdir -p build/src/ && rm -rf node_modules && yarn --prod && cp -r node_modules build/src/ && rm -rf node_modules && yarn && yarn build && cd ../..",
+    "package": "yarn && yarn package:lambda:get-categories && yarn package:lambda:get-products && yarn package:lambda:add-product && yarn package:lambda:delete-product && yarn package:lambda:delete-category && yarn package:lambda:add-category && yarn package:lambda:update-category && yarn package:lambda:update-product && yarn package:lambda:get-master-categories && yarn package:lambda:newsletter && yarn package:lambda:headers && yarn package:lambda:contact-form && yarn package:lambda:add-testimonials && yarn package:lambda:get-testimonials && yarn package:lambda:upload-image && yarn package:lambda:home-page-data"
   },
   "author": "Viral Sanghavi",
   "license": "ISC",
@@ -39,7 +39,7 @@
     "@aws-sdk/client-dynamodb": "^3.538.0",
     "@aws-sdk/util-dynamodb": "^3.540.0",
     "@types/uuid": "^9.0.8",
-    "node-api-helpers": "^1.0.14"
+    "node-api-helpers": "^1.0.16"
   },
   "devDependencies": {
     "typescript": "^5.4.3"

@@ -4,10 +4,9 @@ import {
   PutItemCommand,
   PutItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
-import { NodeHttpHandler } from "@smithy/node-http-handler";
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-import { Product } from "./interface";
-import { v4 as uuid } from "uuid";
+import {marshall} from "@aws-sdk/util-dynamodb";
+import {NodeHttpHandler} from "@smithy/node-http-handler";
+import {v4 as uuid} from "uuid";
 
 export class SdkCalls {
   private ddbClient: DynamoDBClient;

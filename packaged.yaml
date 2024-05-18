@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Specification template describing your function.
 Parameters:
@@ -10,313 +10,326 @@ Parameters:
     Default: prod
     Description: The environment name (e.g. dev, prod, etc.)
     Type: String
-
 Globals:
   Function:
     Handler: index.handler
     Runtime: nodejs18.x
-  # Api:
-    # Cors:
-    #   AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-    #   AllowHeaders: "'*'"
-    #   AllowOrigin: "'*'"
-    # Auth:
-      # ApiKeyRequired: false
-      # AddDefaultAuthorizerToCorsPreflight: false
-    # BinaryMediaTypes:
-    #   - "*~1*"
-
 Resources:
   MidoApi:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: !Ref EnvStageName
+      StageName:
+        Ref: EnvStageName
       Name: mido-api
       Description: Mido API.
       Cors:
-        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-        AllowHeaders: "'*'"
-        AllowOrigin: "'*'"
-        MaxAge: "'600'"
-      # BinaryMediaTypes:
-      #   - "application/json"
-
+        AllowMethods: '''DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'''
+        AllowHeaders: '''*'''
+        AllowOrigin: '''*'''
+        MaxAge: '''600'''
+    Metadata:
+      SamResourceId: MidoApi
   DummyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/dummy/
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/5d26ae13e8f1f1daf126f021063038d0
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /
             Method: GET
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: DummyFunction
   GetCategoriesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/get-categories/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/823b8c023503ad5b27d8864441439083
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /categories
             Method: GET
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: GetCategoriesFunction
   GetProductsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/get-products/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/609112ef91a08ac3501ce82fc86e2e02
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /products
             Method: GET
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: GetProductsFunction
   AddProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/add-product/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/87df5fdadf26e2340b332079973c6005
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 30
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /products/add
             Method: POST
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: AddProductFunction
   DeleteProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/delete-product/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/67163f1b9447a559bc610f9c66be519e
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /products/delete
             Method: DELETE
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: DeleteProductFunction
   AddCategoryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/add-category/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/15d419f56979fc090e6d4bf468fc157c
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /categories/add
             Method: POST
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: AddCategoryFunction
   DeleteCategoryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/delete-category/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/8a07846075bbbd2685ef883c31226351
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /categories/delete
             Method: POST
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: DeleteCategoryFunction
   UpdateCategoryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/update-category/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/58a2813e50194e95970cb14267fa7e37
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /categories/update
             Method: PUT
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: UpdateCategoryFunction
   GetMasterCategoryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/get-master-categories/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/82051617a44b1d112d7905d4b091134d
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /master-categories
             Method: GET
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: GetMasterCategoryFunction
   NewsletterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/newsletter/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/096d12b5028f671682e2984107a5d65e
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /newsletter
             Method: POST
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: NewsletterFunction
   HeaderFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/headers/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/1a797f55db565b73d9aa3644e5f2807d
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /headers
             Method: GET
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: HeaderFunction
   ContactFormFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/contact-form/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/a09d8f1f1e0b45ab89cd6d48090db770
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /contact-form
             Method: POST
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: ContactFormFunction
   AddTestimonialsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/add-testimonials/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/ad234a43f022512987bba97ad47337e4
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /add-testimonials
             Method: POST
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: AddTestimonialsFunction
   GetTestimonialsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/get-testimonials/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/eec202ba9ee4c874719b78a5871fb0e8
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /get-testimonials
             Method: GET
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: GetTestimonialsFunction
   UploadImageFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/upload-image/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/c06f15040c0d5308c122f688ae3f9565
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 30
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /images/upload
             Method: POST
-            RestApiId: !Ref MidoApi
-
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: UploadImageFunction
   HomePageDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/home-page-data/build/src
+      CodeUri: s3://mido-gift-cf-prod-code-deploy/fc95153835272e8c9d757a595cc1d0dc
       Description: Hello World Lambda Function
       MemorySize: 512
       Timeout: 5
       Policies:
-        # Give your Lambda full access to DynamoDB
-        - AmazonDynamoDBFullAccess
+      - AmazonDynamoDBFullAccess
       Events:
         Request:
           Type: Api
           Properties:
             Path: /home
             Method: GET
-            RestApiId: !Ref MidoApi
+            RestApiId:
+              Ref: MidoApi
+    Metadata:
+      SamResourceId: HomePageDataFunction
